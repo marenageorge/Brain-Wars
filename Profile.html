@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Profile</title>
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="Profile.css">
+</head>
+<body>
+    <header>
+        <section>
+            <div>
+                <img id = "logoImg" src = "sources/logo.png" >
+                <label><p>Brain Games</p></label>
+            </div>
+            <section id="buttonCont">
+                <button onclick="location.replace('OneOrTwo.html')">Home</button>
+                <button>Profile</button>
+                <!-- <button>About Us</button>  -->
+                <!-- <button id="signIn">Sign in</button> -->
+                <button id="signOut" onclick="location.replace('default.html')">Sign out</button>
+            </section>
+        </section>
+    </header>
+    <section>
+        <img id ="uppImg" src ="sources/upperImg.jpg">
+    </section>
+    <div id='profilepic'>
+        <img src="sources/male.jpg" alt="ProfilePic">
+    </div>
+    <div id='profiledata'>
+        <div id='profilename'>MY NAME</div>
+        <div id='profilemail'>MY MAIL</div>
+    </div>
+
+    <div id='scoretable'>
+        <table>
+            <thead>
+                <th>GAME</th>
+                <th>HIGH SCORE</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Rain Fall</td>
+                    <td id='rscore'>-</td>
+                </tr>
+                <tr>
+                    <td>Flick Master</td>
+                    <td id='fscore'>-</td>
+                </tr>
+                <tr>
+                    <td>Color Switch</td>
+                    <td id='cscore'>-</td>
+                </tr>
+                <tr>
+                    <td>Memory Game</td>
+                    <td id='mscore'>-</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="Profile.js"></script>
+</body>
+</html>

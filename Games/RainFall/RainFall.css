@@ -1,0 +1,86 @@
+  
+   *{
+    margin: 0;
+    padding:0;
+}
+
+#mainScreen 
+{
+    position: relative;
+    /* margin-top: 100px;
+    margin-left: 500px; */
+    top: 6px;
+    left: 420px;
+    /* border: 3px solid rgb(255,192,203); */
+    border: 3px solid rgb(51,102,255);
+    width: 500px;
+    height: 600px;
+    background-color: rgb(240, 240, 240);
+    border-radius: 10%;
+    box-shadow: 5px 5px 10px gray;
+}
+
+#leftUm,#rightUm,#centerUm
+{
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    top: 425px;
+    opacity: 20%;
+    
+}
+
+#leftUm
+{
+    left: 30px;
+}
+#rightUm
+{
+    left: 260px;
+}
+
+     /* #raindrop
+     {
+        position: absolute;
+        top: 424px;
+        left: 425px;
+     } */
+#centerUm
+{
+left: 150px;
+opacity: 90%;
+}
+ 
+td
+{  
+    height: 100px;
+    left:300px;
+}
+
+#leftimg,#rightimg
+{
+    position: absolute;
+    width: 50px;
+    height: 60px;
+}
+#leftimg
+{
+    left: 100px;
+}
+#rightimg
+{
+    left: 350px;
+}
+
+#displaytable
+{
+    position: absolute;
+    top:27px;
+
+}
+header{
+ height: 80px;
+ padding-top: 20px;
+ text-align: center;
+ font-size: xx-large;
+}

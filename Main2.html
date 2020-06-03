@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Brain Games</title>
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="Main2.css">
+    <!-- <script src="main.js"></script> -->
+</head>
+
+<body>
+    <header>
+        <section>
+            <div>
+                <img id="logoImg" src="sources/logo.png">
+                <label>
+                    <p>Brain Games</p>
+                </label>
+            </div>
+            <section id="buttonCont">
+                <button onclick="location.replace('OneOrTwo.html')">Home</button>
+                <button onclick="location.replace('Profile.html')">Profile</button>
+                <!-- <button>About Us</button> -->
+                <!-- <button id="signIn">Sign in</button> -->
+                <button id="signOut" onclick="location.replace('default.html')">Sign out</button>
+            </section>
+        </section>
+
+    </header>
+    
+    <section>
+        <img id="uppImg" src="sources/upperImg.jpg">
+    </section>
+    <div id='allgames'>
+            <img onclick = "location.replace('Games/RainFall/RainFall2.html')" src="sources/RainFall - Icon.jpg" alt="RF" id='rftoplay' onmouseover='this.src="sources/RainFall - Help.jpg"'
+                onmouseout="this.src='sources/RainFall - Icon.jpg'" />
+            <img onclick = "location.replace('Games/FlickMaster/FlickMaster2.html')" src="sources/Flick Master - Icon.jpg" alt="FM" id='fmtoplay' onmouseover='this.src="sources/Flick Master - Help.jpg"'
+                onmouseout="this.src='sources/Flick Master - Icon.jpg'" />
+            <img onclick = "location.replace('Games/ColorSwitch/ColorSwitch2.html')" src="sources/ColorSwitch - Icon.jpg" alt="CS" id='cstoplay' onmouseover='this.src="sources/ColorSwitch - Help.jpg"'
+                onmouseout="this.src='sources/ColorSwitch - Icon.jpg'" />
+    </div>
+    <!-- <script src="main.js"></script> -->
+</body>
+
+</html>

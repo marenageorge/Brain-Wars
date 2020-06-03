@@ -1,0 +1,44 @@
+*
+{
+    padding: 0;
+    margin: 0;
+}
+
+
+#mainSection
+{
+
+    position: fixed;
+  
+
+
+
+}
+#homePage
+{
+    width: 100%;
+    height: 100%;
+     z-index: -1;
+    opacity: .6;
+
+}
+
+#allgames
+{
+    position: relative;
+    top: 75px;
+    width: 100%;
+    height: 500px;
+}
+#allgames img
+{
+    margin-left: 12%;
+    margin-top: 50px;
+    width: 30%;
+    height: 70%;
+    border-radius: 50px;
+    border: 5px solid rgb(51, 102, 255);
+    box-shadow: 5px 5px 20px rgb(64,64,64);
+    transition: 500ms;
+    transition-timing-function: cubic-bezier(.5,0,.25,1);
+}

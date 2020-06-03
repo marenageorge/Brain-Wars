@@ -1,0 +1,123 @@
+#gameSection
+{
+    position: relative;
+    top :0px;
+    padding: 10px;
+    background-color: rgb(240, 240, 240, .75);
+    opacity: 100%;
+
+}
+
+#gameSection p
+{
+  font-size: 80px;
+  color:black;
+  display: block;
+  text-align: center;
+
+}
+
+article
+{
+    color: black;
+}
+
+#firstGame
+{
+    height: 500px;
+    padding: 10px;
+    display: block;
+}
+
+#game1Des 
+{
+    margin-top:100px;
+    font-size: 30px;
+    width: 700px;
+    float: right;
+}
+
+
+
+
+#firstGame img
+{
+    border-radius: 60px;
+    width: 400px;
+    height: 400px;
+
+}
+
+#secondGame
+{
+    padding: 10px;
+    height: 500px;
+
+
+}
+#game2Des 
+{
+    margin-top:100px;
+    font-size: 30px;
+    width: 700px;
+    float: left;
+}
+
+#secondGame img{
+
+    border-radius: 60px;
+    width: 400px;
+    height: 400px;
+    float: right;
+}
+#thirdGame
+{
+    padding: 10px;
+    height: 500px;
+
+}
+#thirdGame img
+{
+    border-radius: 60px;
+    width: 400px;
+    height: 400px;
+}
+#game3Des 
+{
+    margin-top:100px;
+    font-size: 30px;
+    width: 700px;
+    float: right;
+}
+
+#fourthGame
+{
+    padding: 10px;
+    height: 500px;
+
+}
+#game4Des 
+{
+    margin-top:100px;
+    font-size: 30px;
+    width: 700px;
+    float: left;
+}
+#fourthGame img
+{
+    border-radius: 60px;
+    width: 400px;
+    height: 400px;
+    float: right;
+}
+
+footer
+{
+    background-color:brown;
+    height: 30px;
+    /* color: red; */
+    text-align: center;
+}
+footer>p{
+    top:5px;
+}

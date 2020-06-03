@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Canvas</title>
+    <link rel="stylesheet" href="../../GameOver.css">
+    <style>
+        #gameContainer {
+            position: relative;
+            top: 12px;
+            left: 50px;
+            width: 800px;
+            height: 500px;
+            background-color: rgb(128, 128, 128, 0.1);
+            border-radius: 10%;
+            box-shadow: 5px 5px 10px gray;
+            margin: auto;
+            background-color: rgb(240, 240, 240);
+        }
+
+        #myc {
+            width: 800px;
+            height: 400px;
+        }
+
+        header {
+            height: 80px;
+            padding-top: 20px;
+            text-align: center;
+            font-size: xx-large;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="gameContainer">
+        <header>
+            TIME
+            <div id='timer'></div>
+        </header>
+
+        <!-- for game over -->
+        <div id='gameOver' style="display:none">
+            <div>Game Over</div>
+            <div>Correct: </div>
+            <div>Incorrect: </div>
+            <div>Accuracy: </div>
+            <div>Mean Time: </div>
+            <button id='retryBtn'>Retry</button>
+            <button id='backBtn'>Back</button>
+        </div>
+
+        <canvas id="myc">
+            your browser needs update
+        </canvas>
+    </div>
+
+    <script>
+        var myTimer = document.querySelector('#timer');
+        var gameTime = 15;
+        var time = gameTime;
+        myTimer.innerHTML = time;
+        var myc = document.querySelector('#myc')
+        myc.width = window.innerWidth;
+        myc.height = window.innerHeight;
+        var ctx = myc.getContext('2d');
+        var ctx2 = myc.getContext('2d');
+        // var myc = document.querySelector('canvas')
+        // var ctx = myc.getContext('2d');
+        var x = y = 10;
+        var dx = dy = 2;
+        var correct = 0;
+        var incorrect = 0;
+        var score = 0;
+        // function drawPoint(x, y, r, color) {
+        //     ctx.fillStyle = color;
+        //     ctx.beginPath();
+        //     ctx.arc(x, y, r, 0, 2 * Math.PI);
+        //     ctx.fill()
+        //     ctx.closePath();
+        // }
+        // setInterval(function(){
+        //     ctx.clearRect(0,0,myc.width,myc.height)
+        //     drawPoint(x,y,10,'red');
+        //     // x+=dx;
+        //     y+=dy;
+        //     setInterval(function(){
+        //        var ctx2= myc.getContext('2d');
+
+        //     })
+
+        // },10);
+
+        class roundRect {
+            constructor(rectX, rectY, rectHeight, rectWidth, stroke, fill, c) {
+                var radius = 5;
+                c.beginPath();
+                c.strokeStyle = stroke;
+                c.fillStyle = fill;
+                c.lineWidth = 5;
+                c.moveTo(rectX + rectWidth / 2, rectY);
+                c.arcTo(rectX + rectWidth, rectY, rectX + rectWidth, rectY + rectHeight, radius);
+                c.arcTo(rectX + rectWidth, rectY + rectHeight, rectX, rectY + rectHeight, radius);
+                c.arcTo(rectX, rectY + rectHeight, rectX, rectY, radius);
+                c.arcTo(rectX, rectY, rectX + rectWidth / 2, rectY, radius);
+                c.closePath();
+                c.fill();
+                c.stroke();
+            }
+        }
+        class drawPoint {
+            constructor(rectX, rectY, r, stroke, fill, c) {
+
+                c.beginPath();
+                c.strokeStyle = stroke;
+                c.fillStyle = fill;
+                // c.moveTo(rectX,rectY)
+                c.arc(rectX, rectY, r, 0, 2 * Math.PI);
+                // ctx.fill()
+                c.fill();
+                c.stroke();
+                c.closePath();
+
+            }
+
+        }
+
+        var objects = [
+            { x: 300, y: 1000, speed: { x: 0, y: 10 }, w: 50, h: 7, stroke: "red", fill: "red", drawn: "0" },
+            { x: 300, y: 1000, speed: { x: 0, y: 10 }, w: 25, h: 20, stroke: "pink", fill: 'transparent', drawn: "0" },
+            { x: 1200, y: 1000, speed: { x: 0, y: 10 }, w: 20, h: 18, stroke: "pink", fill: 'transparent', drawn: "0" },
+            { x: 300, y: 1000, speed: { x: 0, y: 10 }, w: 25, h: 20, stroke: "rgb(51,102,255)", fill: 'transparent', drawn: "0" },
+            { x: 1200, y: 1000, speed: { x: 0, y: 10 }, w: 20, h: 18, stroke: "pink", fill: 'transparent', drawn: "0" },
+            { x: 300, y: 1000, speed: { x: 0, y: 10 }, w: 25, h: 20, stroke: "pink", fill: 'transparent', drawn: "0" },
+            { x: 1200, y: 1000, speed: { x: 0, y: 10 }, w: 20, h: 18, stroke: "rgb(51,102,255)", fill: 'transparent', drawn: "0" },
+            { x: 300, y: 1000, speed: { x: 0, y: 10 }, w: 25, h: 20, stroke: "rgb(51,102,255)", fill: 'transparent', drawn: "0" },
+            { x: 1200, y: 1000, speed: { x: 0, y: 10 }, w: 20, h: 18, stroke: "pink", fill: 'transparent', drawn: "0" }
+        ]
+
+        // function animate() {
+        //     ctx.clearRect(0, 0, ctx.width, ctx.height);
+        //     var o = objects[0];
+        //     new roundRect(o.x, o.y, o.w, o.h, o.stroke, o.fill, ctx);
+        //     o.x += o.speed.x
+        //     o.y += o.speed.y
+
+        //     // for (i = 1; i < objects.length; i++) {
+        //     //     var o = objects[i]
+        //     //     new drawPoint(o.x, o.y,10, o.stroke, o.fill, ctx);
+        //     //     o.x += o.speed.x
+        //     //     o.y += o.speed.y
+        //     // }
+        //     requestAnimationFrame(animate);
+        // }
+        // animate();
+
+        var j = 0;
+        setInterval(function () {
+            if (j > objects.length) {
+                var o = objects[j]
+                o["drawn"] = "1";
+                j++
+            }
+
+        }, 500)
+        var leftPink = 1;
+        var rightBlue = 1;
+
+        function start() {
+            ctx.beginPath();
+            ctx.strokeStyle = "gray";
+            ctx.moveTo(300, 10);
+            ctx.lineTo(300, 1000);
+            ctx.lineWidth = 5;
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.strokeStyle = "gray";
+            ctx.moveTo(1200, 10);
+            ctx.lineTo(1200, 1000);
+            ctx.lineWidth = 5;
+            ctx.stroke();
+            ctx.closePath();
+
+
+            if (leftPink == 1) {
+                new drawPoint(300, 500, 80, "pink", "pink", ctx);
+            }
+            else {
+                new drawPoint(300, 500, 80, "rgb(51,102,255)", "rgb(51,102,255)", ctx);
+            }
+            if (rightBlue == 1) {
+                new drawPoint(1200, 500, 80, "rgb(51,102,255)", "rgb(51,102,255)", ctx);
+            }
+            else {
+                new drawPoint(1200, 500, 80, "pink", "pink", ctx);
+            }
+
+
+            // document.onkeydown = checkKey;
+            document.addEventListener('keydown', checkKey);
+
+        }
+        function checkKey(e) {
+            debugger;
+            if (e.keyCode == '37') {
+                if (leftPink == 1) {
+                    new drawPoint(300, 500, 80, "rgb(51,102,255)", "rgb(51,102,255)", ctx);
+                    leftPink = 0;
+                }
+                else {
+                    new drawPoint(300, 500, 80, "pink", "pink", ctx);
+                    leftPink = 1;
+                }
+            }
+            else if (e.keyCode == '39') {
+                if (rightBlue == 1) {
+                    new drawPoint(1200, 500, 80, "pink", "pink", ctx);
+                    rightBlue = 0;
+                }
+                else {
+                    new drawPoint(1200, 500, 80, "rgb(51,102,255)", "rgb(51,102,255)", ctx);
+                    rightBlue = 1;
+                }
+            }
+        }
+        start()
+
+
+        var i = 1;
+        var h2 = setInterval(function () {
+            // if (i == 1)
+
+            ctx.clearRect(0, 0, myc.width, myc.height);
+
+            start();
+
+            for (var i = 1; i < objects.length; i++) {
+
+                var o = objects[i]
+
+                new drawPoint(o.x, o.y, 80, o.stroke, o.fill, ctx);
+
+
+                if (objects[i].y == 500 && objects[i].x == 300) {
+                    if ((objects[i].stroke == "pink" && leftPink == 1))
+                        correct++;
+
+                    else if (objects[i].stroke == "rgb(51,102,255)" && leftPink == 0)
+                        correct++;
+                    else
+                        incorrect++;
+                }
+                if (objects[i].y == 500 && objects[i].x == 1200) {
+                    if ((objects[i].stroke == "rgb(51,102,255)" && rightBlue == 1) || (objects[i].stroke == "pink" && rightBlue == 0)) {
+                        correct++;
+                    }
+                    else
+                        incorrect++;
+                }
+                o.x += o.speed.x
+                o.y += o.speed.y
+
+            }
+            // throwObj()
+
+        }, 40)
+
+        setInterval(() => {
+            throwObj();
+        }, 700);
+
+        //  var arr = [-200, -30, 30, -1300, -300, -450, -880, -1000]
+        function throwObj() {
+
+            // random throw at line 1 or not 
+            // var throwAt1 = Math.floor((Math.random() * 2) + 1);
+            // random throw at line 2 or not 
+            // var throwAt2 = Math.floor((Math.random() * 2) + 1);
+            // get drowned object by num of lanes 
+
+
+            //first obj x = line1 x
+            //first obj y = 0 ;
+            //color random 
+
+
+            //secound obj x = line2 x
+            //secound obj y = 0 ;
+            //color random 
+
+
+            //var x2 = shuffle(arr)
+            var count = 0;
+            for (var i = 1; i < objects.length; i++) {
+                var o = objects[i];
+                if (o.y >= myc.height) {
+
+                    var x = Math.floor((Math.random() * 4) + 1);
+
+                    var x2 = Math.floor((Math.random() * 4) + 1);
+                    if (x2 == 3) {
+                        objects[i].y = -10;
+                        objects[i].x = 1200;
+                        if (x == 1)
+                            objects[i].stroke = "pink"
+                        else if (x == 2)
+                            objects[i].stroke = "rgb(51,102,255)"
+                        // else
+                        //     objects[i].stroke = "transparent"
+                    }
+                    else if (x2 == 2) {
+                        objects[i].y = -10;
+                        objects[i].x = 300;
+                        if (x == 1)
+                            objects[i].stroke = "pink"
+                        else if (x == 2)
+                            objects[i].stroke = "rgb(51,102,255)"
+                        // else
+                        //     objects[i].stroke = "transparent"
+
+                    }
+                    if (count++ == 2) {
+                        return;
+                    }
+                }
+            }
+        }
+
+        var h = setInterval(function () {
+            if (time) {
+                time--;
+                myTimer.innerHTML = time;
+            }
+            else {
+                document.removeEventListener('keydown', checkKey);
+                clearInterval(h);
+                clearInterval(h2);
+                myc.style.display = "none"
+                // open score page
+
+                var myUser = JSON.parse(localStorage.currentUser);
+                if (correct > myUser.csScore) {
+                    myUser.csScore = correct;
+
+                    localStorage.setItem("currentUser", JSON.stringify(myUser))
+
+                    var allUsers = JSON.parse(localStorage.websiteUsers);
+                    for (var i = 0; i < allUsers.length; i++) {
+
+                        if (myUser.email == allUsers[i].email) {
+                            allUsers[i].csScore = myUser.csScore;
+                            allUsers.push(allUsers[i]);
+                            allUsers.splice(i, 1)
+                            localStorage.setItem("websiteUsers", JSON.stringify(allUsers))
+                            break;
+
+                        }
+
+                    }
+                }
+                myGameOver.style.display = "block";
+                myCorrect.innerHTML = "Correct:    " + correct;
+                myIncorrect.innerHTML = "Incorrect:    " + incorrect;
+                if (correct + incorrect == 0)
+                    myAccuracy.innerHTML = "Accuracy:    -";
+                else
+                    myAccuracy.innerHTML = "Accuracy:    " + (correct / (correct + incorrect) * 100).toPrecision(3) + " %";
+                if (correct == 0)
+                    myMeanTime.innerHTML = "Mean Time:    -";
+                else
+                    myMeanTime.innerHTML = "Mean Time:    " + (gameTime / correct).toPrecision(2) + " s";
+            }
+        }, 1000)
+
+
+        // for game over
+
+        var myGameOver = document.querySelector('#gameOver');
+        var myCorrect = document.querySelector('#gameOver :nth-child(2)');
+        var myIncorrect = document.querySelector('#gameOver :nth-child(3)');
+        var myAccuracy = document.querySelector('#gameOver :nth-child(4)');
+        var myMeanTime = document.querySelector('#gameOver :nth-child(5)');
+        var myBackBtn = document.querySelector('#backBtn');
+        var myRetryBtn = document.querySelector('#retryBtn');
+
+        myBackBtn.addEventListener('click', function () {
+            document.location.replace ("../../OneOrTwo.html");
+        })
+        myRetryBtn.addEventListener('click', function () {
+            document.location.replace("ColorSwitch.html");
+        })
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+*{
+    margin:0;
+    padding:0;
+}
+.rotate0{
+    transform: rotateZ(0deg);
+}
+.rotate90{
+    transform: rotateZ(90deg);
+}
+.rotate180{
+    transform: rotateZ(180deg);
+}
+.rotate270{
+    transform: rotateZ(270deg);
+}
+body{
+    overflow: hidden;
+}
+#gameContainer,#gameContainer2{
+    position: relative;
+    top: 12px;
+    /* left: auto; */
+    width: 500px;
+    height: 600px;
+    background-color: rgb(240, 240, 240);
+    border-radius: 10%;
+    box-shadow: 5px 5px 10px gray;
+}
+#gameContainer {
+    float: right;
+    right: 300px;
+}
+#gameContainer2 {
+    float: left;
+    left: 50px;
+}
+#game{
+            
+    width: 1600px;
+}
+header{
+    height: 80px;
+    padding-top: 20px;
+    text-align: center;
+    font-size: xx-large;
+}
+img{
+    position: absolute;
+    top: 150px;
+    left: 50px;
+    width: 400px;
+}

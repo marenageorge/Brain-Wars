@@ -1,0 +1,307 @@
+<html lang="en">
+
+<head>
+    <title>game</title>
+    <style>
+        table {
+            text-align: center;
+            width: 100%;
+            height: 80%;
+        }
+
+        .mySlides {
+            height: 100px;
+            width: 100px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 5px gray;
+        }
+
+        #gameContainer {
+
+            position: relative;
+            top: 12px;
+            left: 50px;
+            width: 800px;
+            height: 500px;
+            background-color: rgb(128, 128, 128, 0.1);
+            border-radius: 10%;
+            box-shadow: 5px 5px 10px gray;
+            margin: auto;
+            background-color: rgb(240, 240, 240);
+
+        }
+
+        #myc {
+            width: 800px;
+            height: 400px;
+        }
+
+        header {
+            height: 80px;
+            padding-top: 20px;
+            text-align: center;
+            font-size: xx-large;
+        }
+
+        #gameOver {
+            background-color: rgb(240, 240, 240);
+            position: absolute;
+            text-align: center;
+            z-index: 3;
+            width: 100%;
+            height: 70%;
+        }
+
+        #gameOver div {
+            font-size: 22px;
+            margin-top: 20px;
+        }
+
+        #gameOver :nth-child(1) {
+            color: brown;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        #gameOver button {
+            font-size: 30px;
+            outline: none;
+            width: 40%;
+            height: 20%;
+            position: absolute;
+            top: 70%;
+            left: 5%;
+            border: none;
+            background-color: none;
+            border-radius: 50px;
+            transition: 500ms;
+        }
+
+        #gameOver :last-child {
+            left: 55%;
+        }
+
+        #gameOver button:hover {
+            background-color: rgb(255, 190, 68);
+        }
+
+        #gameOver button:active {
+            transform: scale(.95);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="gameContainer">
+        <header>
+            TIME
+            <div id='timer'></div>
+        </header>
+
+        <!-- for game over -->
+        <div id='gameOver' style="display:none">
+            <div>Game Over</div>
+            <div>Correct: </div>
+            <div>Incorrect: </div>
+            <div>Accuracy: </div>
+            <div>Mean Time: </div>
+            <button id='retryBtn'>Retry</button>
+            <button id='backBtn'>Back</button>
+        </div>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <img id="1" class="mySlides" onclick="clicked(this)" src="think.jpg">
+                    </td>
+                    <td>
+                        <img id="2" class="mySlides" onclick="clicked(this)" src="think.jpg">
+                    </td>
+                    <td>
+                        <img id="3" class="mySlides" onclick="clicked(this)" src="think.jpg">
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <img id="4" class="mySlides" onclick="clicked(this)" src="think.jpg">
+                    </td>
+                    <td>
+                        <img id="5" class="mySlides" onclick="clicked(this)" src="think.jpg">
+                    </td>
+                    <td>
+                        <img id="6" class="mySlides" onclick="clicked(this)" src="think.jpg">
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+
+    <script>
+        var myTimer = document.querySelector('#timer');
+        var mySlide = document.getElementsByClassName('mySlides');
+        var mytd = document.querySelector('td');
+        var gameTime = 10;
+        var time = gameTime;
+        myTimer.innerHTML = time;
+
+        var arr = ["square.jpg", "circle.jpg", "polygon.jpg", "polygon.jpg", "square.jpg", "circle.jpg"];
+        shuffle(arr);
+        var i = -1;
+        var prev = -1;
+        var count = 1;
+        var bool = false;
+        var correct = 0;
+        var incorrect = 0;
+        var score = 0;
+        var myGameOver = document.querySelector('#gameOver');
+        var myCorrect = document.querySelector('#gameOver :nth-child(2)');
+        var myIncorrect = document.querySelector('#gameOver :nth-child(3)');
+        var myAccuracy = document.querySelector('#gameOver :nth-child(4)');
+        var myMeanTime = document.querySelector('#gameOver :nth-child(5)');
+        var myBackBtn = document.querySelector('#backBtn');
+        var myRetryBtn = document.querySelector('#retryBtn');
+
+        myBackBtn.addEventListener('click', function () {
+            document.location.replace("../../Main.html");
+        })
+        myRetryBtn.addEventListener('click', function () {
+            document.location.replace("MemoryGame.html");
+        })
+
+        function start() {
+            for (var i = 0; i < 6; i++) {
+                debugger
+                document.getElementById((i + 1)).src = arr[i];
+            }
+        }
+        start();
+        var timestart = 5;
+        var h2 = setInterval(function () {
+            //start();
+            if (timestart) {
+                timestart--;
+
+            }
+            else {
+                //document.removeEventListener('click', clicked);
+                clearInterval(h2);
+                clearInterval(start);
+                for (var i = 0; i < 6; i++) {
+                    document.getElementById((i + 1)).src = "think.jpg";
+                }
+            }
+        }, 200)
+
+        function clicked(x) {
+            // if(bool==false)
+            prev = i;
+            i = x.id - 1;
+            x.src = arr[i];
+            x.style.width = "100px";
+            x.style.height = "100px";
+            if (prev != -1 && arr[prev] != arr[i]) {
+                count++;
+                console.log("da5l wl prev" + prev + "wel i :" + i)
+                //bool=false;
+            }
+            else if (arr[prev] == arr[i]) {
+                count = 1;
+                prev = -1;
+                i = -1;
+                correct++;
+                //bool=true;
+            }
+
+            if (count == 2) {
+                setTimeout(function () {
+                    var preImg = document.getElementById(prev + 1);
+                    preImg.src = "think.jpg";
+                    x.src = "think.jpg";
+                    console.log(prev);
+                    count = 1;
+                    prev = -1;
+                    i = -1;
+                }, 1000);
+            }
+        }
+
+        function shuffle(array) {
+            var currentIndex = array.length, temporaryValue, randomIndex;
+
+            // While there remain elements to shuffle...
+            while (0 !== currentIndex) {
+
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                // And swap it with the current element.
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+
+            return array;
+        }
+
+        var h = setInterval(function () {
+            if (time && correct < 3) {
+                time--;
+                myTimer.innerHTML = time;
+            }
+            else {
+                //document.removeEventListener('click', clicked);
+                clearInterval(h);
+                clearInterval(clicked);
+                for (var i = 0; i < mySlide.length; i++)
+                    mySlide[i].style.display = "none"
+                // mytd.style.display = "none"
+
+
+                // open score page
+                var myUser = JSON.parse(localStorage.currentUser);
+                if (correct > myUser.mgScore) {
+                    myUser.mgScore = correct;
+
+                    localStorage.setItem("currentUser", JSON.stringify(myUser))
+
+                    var allUsers = JSON.parse(localStorage.websiteUsers);
+                    for (var i = 0; i < allUsers.length; i++) {
+
+                        if (myUser.email == allUsers[i].email) {
+                            allUsers[i].mgScore = myUser.mgScore;
+                            allUsers.push(allUsers[i]);
+                            allUsers.splice(i, 1)
+                            localStorage.setItem("websiteUsers", JSON.stringify(allUsers))
+                            break;
+
+                        }
+
+                    }
+                }
+
+                myGameOver.style.display = "block";
+                myCorrect.innerHTML = "Correct:    " + correct;
+                myIncorrect.innerHTML = "Incorrect:    " + (3 - correct);
+                if (correct + incorrect == 0)
+                    myAccuracy.innerHTML = "Accuracy:    -";
+                else
+                    myAccuracy.innerHTML = "Accuracy:    " + (correct / (correct + (3 - correct)) * 100).toPrecision(3) + " %";
+                if (correct == 0)
+                    myMeanTime.innerHTML = "Mean Time:    -";
+                else
+                    myMeanTime.innerHTML = "Mean Time:    " + (gameTime / correct).toPrecision(2) + " s";
+            }
+        }, 1000)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+ #registerSide
+   {
+       position: absolute;
+       top:50px;
+       background-color: rgb(230, 240, 240, .75);;
+       float: left;
+       width: 300px;
+       height: 500px;
+       right: 0px;
+       padding-top: 50px;
+   }
+   #regIn,#regUp
+   {
+       color:white;
+       background-color:brown;
+       border-radius: 20px;
+       width: 100px;
+   }
+   #regIn:hover, #regUp:hover,#getStart:hover
+   /* #regIn,#regUp,#getStart:hover */
+   {
+        border-bottom: none;
+        font-weight: normal;
+    }
+   #registerDiv input
+   {
+       margin: auto;;
+       padding-top: 10px;
+       margin-top: 15px;
+       padding-left: 10px;
+       padding-bottom: 10px; 
+       display: block;
+       width: 80%;
+       border-radius: 20px  ;
+       border: brown solid;
+       text-decoration: solid;
+       font-size: 15px;
+       font-family: Arial, Helvetica, sans-serif;
+   }
+   #getStart
+   {
+       color: white;
+       background-color: brown;
+       margin-top: 40px;
+       margin-left: 15px;
+       border-radius: 50px;
+       width: 90%;
+       height:30px ;
+   
+
+   }
+   #regEnter
+   {
+       text-align: center;
+   }
+   #regMsg
+   {
+       display: inline;
+       color:white;
+   }

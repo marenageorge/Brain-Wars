@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Brain Games</title>
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="Main.css">
+    <!-- <script src="main.js"></script> -->
+</head>
+
+<body>
+    <header>
+        <section>
+            <div>
+                <img id="logoImg" src="sources/logo.png">
+                <label>
+                    <p>Brain Games</p>
+                </label>
+            </div>
+            <section id="buttonCont">
+                <button onclick="location.replace('OneOrTwo.html')">Home</button>
+                <button onclick="location.replace('Profile.html')">Profile</button>
+                <!-- <button>About Us</button> -->
+                <!-- <button id="signIn">Sign in</button> -->
+                <button id="signOut" onclick="location.replace('default.html')">Sign out</button>
+            </section>
+        </section>
+
+    </header>
+    
+    <section>
+        <img id="uppImg" src="sources/upperImg.jpg">
+    </section>
+    <div id='allgames'>
+        <!-- <a href="Games/RainFall/RainFall.html"> -->
+            <img onclick = "location.replace('Games/RainFall/RainFall.html')" src="sources/RainFall - Icon.jpg" alt="RF" id='rftoplay' onmouseover='this.src="sources/RainFall - Help.jpg"'
+                onmouseout="this.src='sources/RainFall - Icon.jpg'" />
+        <!-- </a> -->
+        <!-- <a href="Games/FlickMaster/FlickMaster.html"> -->
+            <img onclick = "location.replace('Games/FlickMaster/FlickMaster.html')" src="sources/Flick Master - Icon.jpg" alt="FM" id='fmtoplay' onmouseover='this.src="sources/Flick Master - Help.jpg"'
+                onmouseout="this.src='sources/Flick Master - Icon.jpg'" />
+        <!-- </a> -->
+        <!-- <a href="Games/ColorSwitch/ColorSwitch.html"> -->
+            <img onclick = "location.replace('Games/ColorSwitch/ColorSwitch.html')" src="sources/ColorSwitch - Icon.jpg" alt="CS" id='cstoplay' onmouseover='this.src="sources/ColorSwitch - Help.jpg"'
+                onmouseout="this.src='sources/ColorSwitch - Icon.jpg'" />
+        <!-- </a> -->
+        <!-- <a href="Games/MemoryGame/MemoryGame.html"> -->
+            <img onclick = "location.replace('Games/MemoryGame/MemoryGame.html')" src="sources/MemoryGame - Icon.jpg" alt="CS" id='cstoplay' onmouseover='this.src="sources/MemoryGame - Help.jpg"'
+                onmouseout="this.src='sources/MemoryGame - Icon.jpg'" />
+        <!-- </a> -->
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
